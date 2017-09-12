@@ -34,7 +34,26 @@ auf den BwInf-Webseiten findest.
 
 ## Todo
 - [x] Punkte einlesen
-- [ ] Schnittpunkte bestimmen
+- [x] Schnittpunkte bestimmen
 - [ ] Kreisläufe finden
 - [ ] Grafische Ausgabe
 
+## Notes
+
+### Punkte einlesen
+Funktion `List<Line2D> einlesen(File... files)`
+* Iteriert durch Dateien
+    * Scanner: 1ste Zeile wird übersprungen
+    * Iteriert durch Zeilen:
+        * Zeile an " " splitten
+        * Liste 2 neue Line2D anhängen
+     
+### Schnittpunkte bestimmen
+`Line2D.intersectsLine()` hilft ungemein
+* Eintragen aller Line2D in Hashmap
+    * Key: `line.toString()`
+    * Value: `new Node(line)`
+* Iterieren durch `lines`, Laufvariable: `line`
+    * Iterieren durch `lines`, Laufvariable: `vergleich`
+        * falls `line == vergleich`: Nächster Durchlauf (Um Selbst-Referenz zu vermeiden)
+        * else: `vergleich` zu Intersects von `line`'s Eintrag in der HashMap hinzufügen  
