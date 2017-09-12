@@ -33,7 +33,7 @@ auf den BwInf-Webseiten findest.
 * 3-Schrittige Kreisläufe finden
 
 ## Todo
-- [ ] Punkte einlesen
+- [x] Punkte einlesen
 - [ ] Schnittpunkte bestimmen
 - [ ] Kreisläufe finden
 - [ ] Grafische Ausgabe
