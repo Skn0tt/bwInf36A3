@@ -1,4 +1,5 @@
 import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Graph {
 
     // Create all Nodes
     for (Line2D l : lines) {
-      Node n = new Node(l);
+      Node n = new Node(l.getP1());
       nodes.put(n.hash(), n);
     }
 
@@ -21,10 +22,10 @@ public class Graph {
         if (l == j) continue;
         if (l.intersectsLine(j)) {
           nodes
-            .get(l.toString())
+            .get(l.getP1().toString())
             .intersects
             .add(
-              nodes.get(j.toString())
+              nodes.get(j.getP1().toString())
             );
         }
       }
@@ -32,22 +33,38 @@ public class Graph {
   }
 
   List<Triangle> triangles() {
-    for (String key : nodes.keySet()) {
-      System.out.println(
-        nodes
-          .get(key)
-          .toString()
-      );
+    Map<String, Triangle> triangles = new HashMap<>();
+
+    for (Node a : nodes.values()) {
+      for (Node b : a.intersects) {
+        for (Node c : b.intersects) {
+          for (Node d : c.intersects) {
+            if (a.hash().equals(b.hash())) continue;
+            if (a.hash().equals(c.hash())) continue;
+            if (b.hash().equals(c.hash())) continue;
+
+            if (a.hash().equals(d.hash())) {
+              Triangle t = new Triangle(
+                a.value,
+                b.value,
+                c.value
+              );
+
+              triangles.put(t.hash(), t);
+            }
+          }
+        }
+      }
     }
 
-    return new ArrayList<>();
+    return new ArrayList<>(triangles.values());
   }
 
   private class Node {
     List<Node> intersects = new ArrayList<>();
-    Line2D value;
+    Point2D value;
 
-    Node(Line2D value) {
+    Node(Point2D value) {
       this.value = value;
     }
 
