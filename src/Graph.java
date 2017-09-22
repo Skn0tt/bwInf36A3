@@ -12,20 +12,21 @@ public class Graph {
 
     // Create all Nodes
     for (Line2D l : lines) {
-      Node n = new Node(l.getP1());
+      Node n = new Node(l);
       nodes.put(n.hash(), n);
     }
 
     // Add Intersects
     for (Line2D l : lines) {
       for (Line2D j : lines) {
-        if (l == j) continue;
+        if (l.equals(j)) continue;
+
         if (l.intersectsLine(j)) {
           nodes
-            .get(l.getP1().toString())
+            .get(l.toString())
             .intersects
             .add(
-              nodes.get(j.getP1().toString())
+              nodes.get(j.toString())
             );
         }
       }
@@ -62,9 +63,9 @@ public class Graph {
 
   private class Node {
     List<Node> intersects = new ArrayList<>();
-    Point2D value;
+    Line2D value;
 
-    Node(Point2D value) {
+    Node(Line2D value) {
       this.value = value;
     }
 

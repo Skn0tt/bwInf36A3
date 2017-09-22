@@ -1,25 +1,23 @@
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
 
 public class Triangle {
-  Point2D a, b, c;
+  Line2D a, b, c;
 
-  Triangle(Point2D a, Point2D b, Point2D c) {
+  Triangle(Line2D a, Line2D b, Line2D c) {
     this.a = a;
     this.b = b;
     this.c = c;
   }
 
   String hash() {
-    Point2D[] points = {a, b, c};
-    Arrays.sort(points, (a, b) -> {
-      if (a.getX() != b.getX()) return Double.compare(a.getX(), b.getX());
-      return Double.compare(a.getY(), b.getY());
-    });
+    Line2D[] lines = {a, b, c};
+    //TODO: Sort
 
-    return points[0].toString() +
-      points[1].toString() +
-      points[2].toString();
+    return lines[0].toString() +
+      lines[1].toString() +
+      lines[2].toString();
   }
 
   @Override

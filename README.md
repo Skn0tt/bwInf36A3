@@ -57,3 +57,5 @@ Funktion `List<Line2D> einlesen(File... files)`
     * Iterieren durch `lines`, Laufvariable: `vergleich`
         * falls `line == vergleich`: Nächster Durchlauf (Um Selbst-Referenz zu vermeiden)
         * else: `vergleich` zu Intersects von `line`'s Eintrag in der HashMap hinzufügen  
+## TODO
+- Point2D to Line2D

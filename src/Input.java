@@ -17,6 +17,7 @@ class Input {
 
       while(s.hasNextLine()) {  // Go through Lines
         String line = s.nextLine(); // Get Line
+        if (line.isEmpty()) continue;
         String[] values = line.split(" ");
 
         Point2D a = new Point2D.Float(

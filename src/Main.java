@@ -20,6 +20,11 @@ public class Main {
     }
 
     Graph g = new Graph(lines);
-    for (Triangle t : g.triangles()) System.out.println(t.toString());
+
+    List<Triangle> triangles = g.triangles();
+
+    new Output(triangles);
+    System.out.println(triangles.size());
+    for (Triangle t : triangles) System.out.println(t.toString());
   }
 }
