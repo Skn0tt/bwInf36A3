@@ -10,7 +10,7 @@
 <body>
   <div id="box" class="jxgbox" style="width: 800px; height: 800px;"></div>
   <script type="text/javascript">
-    const triangles = ##TRIANGLE##;
+    const polygons = ##POLYGON##;
   </script>
   <script type="text/javascript">
     var board = JXG.JSXGraph.initBoard('box', {
@@ -19,9 +19,10 @@
       grid: true,
     });
 
-    triangles.forEach(item => {
-      board.create('polygon', [item[0], item[1], item[2]]);
-    })
+    polygons.forEach(item => {
+      if (item.length === 2) board.create('segment', [item[0], item[1]]);
+      else board.create('polygon', [item[0], item[1], item[2]]);
+    });
   </script>
 </body>
 </html>

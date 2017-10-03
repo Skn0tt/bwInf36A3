@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Line2D;
-import java.util.List;
 
 /**
  * Created by simon.knott on 22.09.2017.

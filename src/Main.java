@@ -13,7 +13,7 @@ class Main {
     List<Line2D> lines = new ArrayList<>();
 
     try {
-      lines.addAll(Input.read(files));  // Alle Strecken read und anhängen
+      lines.addAll(InputReader.readFromFile(files));  // Alle Strecken readFromFile und anhängen
     } catch(FileNotFoundException exc) {
       System.out.println("Error: " + exc.toString());
       System.exit(1);
@@ -23,11 +23,20 @@ class Main {
 
     Triangle[] triangles = g.triangles();
 
-    //TODO: Write GUI to Choose
     OutputWeb.show(triangles);
 
     new OutputSwing(triangles);
     System.out.println(triangles.length);
     for (Triangle t : triangles) System.out.println(t.toString());
+  }
+
+  static Triangle[] compute(String input) {
+    List<Line2D> lines = new ArrayList<>();
+
+    lines.addAll(InputReader.readFromString(input));
+
+    Graph g = new Graph(lines);
+
+    return g.triangles();
   }
 }

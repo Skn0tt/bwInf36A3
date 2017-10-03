@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.io.*;
 import java.util.Scanner;
@@ -11,8 +12,14 @@ class OutputWeb {
    * @param triangles
    */
   static void show(Triangle... triangles){
-    String json = triangles2JSON(triangles);
+    show(triangles2JSON(triangles));
+  }
 
+  static void show(Line2D... lines) {
+    show(lines2JSON(lines));
+  }
+
+  private static void show(String json) {
     try {
       File htmlFile = getPage(json);
       Desktop.getDesktop().browse(htmlFile.toURI());
@@ -30,7 +37,7 @@ class OutputWeb {
   private static File getPage(String json) throws IOException {
     Scanner s = new Scanner(template, "UTF-8");
     String text = s.useDelimiter("\\A").next();
-    String result = text.replaceAll("##TRIANGLE##", json);
+    String result = text.replaceAll("##POLYGON##", json);
 
     File f = new File("./web/output.html");
 
@@ -39,6 +46,27 @@ class OutputWeb {
     writer.close();
 
     return f;
+  }
+
+  private static String lines2JSON(Line2D... lines) {
+    StringBuilder b = new StringBuilder();
+    b.append("[");
+    for (Line2D l : lines) {
+      b.append(line2Arr(l));
+      b.append(", ");
+    }
+    b.append("]");
+
+    return b.toString();
+  }
+
+  private static String line2Arr(Line2D l) {
+    return
+      "[" +
+        point2Arr(l.getP1()) +
+        ", " +
+        point2Arr(l.getP2()) +
+      "]";
   }
 
   /**
