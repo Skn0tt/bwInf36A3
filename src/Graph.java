@@ -1,12 +1,11 @@
 import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Graph {
-  private Map<String, Node> nodes = new HashMap<>();
+class Graph {
+  private final Map<String, Node> nodes = new HashMap<>();
 
   public Graph(List<Line2D> lines) {
 
@@ -21,7 +20,7 @@ public class Graph {
       for (Line2D j : lines) {
         if (l.equals(j)) continue;
 
-        if (l.intersectsLine(j)) {
+        if (Geometry.intersection(l, j) != null) {
           nodes
             .get(l.toString())
             .intersects
@@ -33,7 +32,7 @@ public class Graph {
     }
   }
 
-  List<Triangle> triangles() {
+  Triangle[] triangles() {
     Map<String, Triangle> triangles = new HashMap<>();
 
     for (Node a : nodes.values()) {
@@ -51,19 +50,19 @@ public class Graph {
                 c.value
               );
 
-              triangles.put(t.hash(), t);
+              if (t.hasArea()) triangles.put(t.hash(), t);
             }
           }
         }
       }
     }
 
-    return new ArrayList<>(triangles.values());
+    return  triangles.values().toArray(new Triangle[0]);
   }
 
   private class Node {
-    List<Node> intersects = new ArrayList<>();
-    Line2D value;
+    final List<Node> intersects = new ArrayList<>();
+    final Line2D value;
 
     Node(Line2D value) {
       this.value = value;

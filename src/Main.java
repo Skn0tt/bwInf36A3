@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+class Main {
   static private final File[] files = new File[]{
-    new File("res/dreiecke1.txt"),
+    new File("res/dreiecke1.txt")
   };
 
   public static void main(String[] args) {
@@ -21,10 +21,13 @@ public class Main {
 
     Graph g = new Graph(lines);
 
-    List<Triangle> triangles = g.triangles();
+    Triangle[] triangles = g.triangles();
 
-    new Output(triangles);
-    System.out.println(triangles.size());
+    //TODO: Write GUI to Choose
+    OutputWeb.show(triangles);
+
+    new OutputSwing(triangles);
+    System.out.println(triangles.length);
     for (Triangle t : triangles) System.out.println(t.toString());
   }
 }

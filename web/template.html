@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Output</title>
+
+  <script type="text/javascript" src="./jsxgraphcore.js"></script>
+  <link rel="stylesheet" href="./jsxgraph.css">
+</head>
+<body>
+  <div id="box" class="jxgbox" style="width: 800px; height: 800px;"></div>
+  <script type="text/javascript">
+    const triangles = ##TRIANGLE##;
+  </script>
+  <script type="text/javascript">
+    var board = JXG.JSXGraph.initBoard('box', {
+      boundingBox: [-2, 4, 6, -4],
+      axis: true,
+      grid: true,
+    });
+
+    triangles.forEach(item => {
+      board.create('polygon', [item[0], item[1], item[2]]);
+    })
+  </script>
+</body>
+</html>
