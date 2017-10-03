@@ -2,6 +2,9 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
 
+/**
+ * Model for the Triangle
+ */
 class Triangle {
   final Point2D a;
   final Point2D b;
@@ -13,6 +16,10 @@ class Triangle {
     this.c = Geometry.intersection(b, c);
   }
 
+  /**
+   * Returns a unique hash, computed from the points
+   * @return
+   */
   String hash() {
     Point2D[] points = {a, b, c};
 
@@ -27,10 +34,18 @@ class Triangle {
       points[2].toString();
   }
 
+  /**
+   * Checks if Triangles Area is bigger than 0
+   * @return
+   */
   boolean hasArea() {
     return !(a.equals(b) && a.equals(c) && b.equals(c));
   }
 
+  /**
+   * Returns its sides
+   * @return
+   */
   Line2D[] sides() {
     return new Line2D[] {
       new Line2D.Double(a, b),

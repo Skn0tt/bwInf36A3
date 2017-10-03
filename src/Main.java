@@ -13,7 +13,7 @@ class Main {
     List<Line2D> lines = new ArrayList<>();
 
     try {
-      lines.addAll(Input.einlesen(files));  // Alle Strecken einlesen und anhängen
+      lines.addAll(Input.read(files));  // Alle Strecken read und anhängen
     } catch(FileNotFoundException exc) {
       System.out.println("Error: " + exc.toString());
       System.exit(1);

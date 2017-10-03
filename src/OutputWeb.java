@@ -3,10 +3,15 @@ import java.awt.geom.Point2D;
 import java.io.*;
 import java.util.Scanner;
 
-public class OutputWeb {
-  static final File template = new File("web/template.html");
-  static void show(Triangle... t){
-    String json = triangles2JSON(t);
+class OutputWeb {
+  private static final File template = new File("web/template.html");
+
+  /**
+   * Shows the given triangles in browser
+   * @param triangles
+   */
+  static void show(Triangle... triangles){
+    String json = triangles2JSON(triangles);
 
     try {
       File htmlFile = getPage(json);
@@ -16,6 +21,12 @@ public class OutputWeb {
     }
   }
 
+  /**
+   * Creates viewable HTML page from template
+   * @param json
+   * @return
+   * @throws IOException
+   */
   private static File getPage(String json) throws IOException {
     Scanner s = new Scanner(template, "UTF-8");
     String text = s.useDelimiter("\\A").next();
@@ -30,6 +41,11 @@ public class OutputWeb {
     return f;
   }
 
+  /**
+   * Builds a JSON Array of given triangles
+   * @param triangles
+   * @return
+   */
   private static String triangles2JSON(Triangle... triangles) {
     StringBuilder b = new StringBuilder();
     b.append("[");
@@ -41,6 +57,11 @@ public class OutputWeb {
     return b.toString();
   }
 
+  /**
+   * Builds a JSON Array of given triangle
+   * @param t
+   * @return
+   */
   private static String triangle2Arr(Triangle t) {
     return
       "[" +
@@ -52,6 +73,11 @@ public class OutputWeb {
       "]";
   }
 
+  /**
+   * Builds a JSON Array of given Point Tuple
+   * @param p
+   * @return
+   */
   private static String point2Arr(Point2D p) {
     return
       "[" +

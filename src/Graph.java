@@ -7,6 +7,10 @@ import java.util.Map;
 class Graph {
   private final Map<String, Node> nodes = new HashMap<>();
 
+  /**
+   * Creates the graph with the lines given
+   * @param lines
+   */
   public Graph(List<Line2D> lines) {
 
     // Create all Nodes
@@ -32,6 +36,10 @@ class Graph {
     }
   }
 
+  /**
+   * Finds all Triangles in the Graph by searching for circles with a depth of 3
+   * @return all Triangles in the Graph
+   */
   Triangle[] triangles() {
     Map<String, Triangle> triangles = new HashMap<>();
 
@@ -74,8 +82,9 @@ class Graph {
 
     @Override
     public String toString() {
-      return "Node{" +
-        "value=" + value +
+      return
+        "Node{" +
+          "value=" + value +
         '}';
     }
   }

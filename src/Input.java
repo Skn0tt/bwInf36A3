@@ -7,7 +7,13 @@ import java.util.List;
 import java.util.Scanner;
 
 class Input {
-  static List<Line2D> einlesen(File... files) throws FileNotFoundException {
+  /**
+   * Reads in all Lines from the given files
+   * @param files
+   * @return
+   * @throws FileNotFoundException
+   */
+  static List<Line2D> read(File... files) throws FileNotFoundException {
     List<Line2D> strecken = new ArrayList<>();
 
     for (File f : files) {

@@ -4,6 +4,13 @@ import java.awt.geom.Point2D;
 class Geometry {
   private final static int factor = 8;
 
+  /**
+   * Takes in two lines and returns their intersection point.
+   * If there's none, It returns null.
+   * @param line1
+   * @param line2
+   * @return intersection point / null
+   */
   static Point2D intersection(Line2D line1, Line2D line2) {
     double x0 = line1.getX1();
     double y0 = line1.getY1();
@@ -35,6 +42,12 @@ class Geometry {
     return new Point2D.Double(round(x, factor), round(y, factor));
   }
 
+  /**
+   * Rounds a double.
+   * @param value
+   * @param places
+   * @return
+   */
   private static double round(double value, int places) {
     long factor = (long) Math.pow(10, places);
     value = value * factor;
