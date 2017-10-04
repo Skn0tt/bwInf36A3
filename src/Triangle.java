@@ -62,4 +62,15 @@ class Triangle {
       ", c=" + c +
       '}';
   }
+  
+  public int compareTo(Trianlge b) {
+    if (!this.a.equals(b.a)) return comparePoint(this.a, b.a);
+    if (!this.b.equals(b.b)) return comparePoint(this.b, b.b);
+    return comparePoint(this.c, c.c);
+  }
+
+  private int comparePoint(Point2D a, Point2D b) {
+    if (a.getX() != b.getX()) return Double.compare(a.getX(), b.getX());
+    return Double.compare(a.getY(), b.getY());
+  }
 }
