@@ -111,8 +111,7 @@ public class InputSwing {
   }
 
   private void updateResult() {
-    //TODO: implement Comparator
-    // Arrays.sort(result, (a, b) -> a.compareTo(b));
+    Arrays.sort(result, (a, b) -> a.compareTo(b));
 
     StringBuilder builder = new StringBuilder();
     for (Triangle t : result) {
