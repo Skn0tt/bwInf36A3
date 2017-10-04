@@ -45,12 +45,13 @@ class Graph {
 
     for (Node a : nodes.values()) {
       for (Node b : a.intersects) {
-        for (Node c : b.intersects) {
-          for (Node d : c.intersects) {
-            if (a.hash().equals(b.hash())) continue;
-            if (a.hash().equals(c.hash())) continue;
-            if (b.hash().equals(c.hash())) continue;
+        if (a.hash().equals(b.hash())) continue;
 
+        for (Node c : b.intersects) {
+          if (a.hash().equals(c.hash())) continue;
+          if (b.hash().equals(c.hash())) continue;
+
+          for (Node d : c.intersects) {
             if (a.hash().equals(d.hash())) {
               Triangle t = new Triangle(
                 a.value,

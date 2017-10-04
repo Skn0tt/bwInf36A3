@@ -4,7 +4,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Line2D;
-import java.util.List;
+import java.util.Arrays;
 
 public class InputSwing {
   private JButton showInSwingBttn;
@@ -25,7 +25,7 @@ public class InputSwing {
 
   private Triangle[] result;
 
-  boolean inputLegal = false;
+  private boolean inputLegal = false;
 
   private InputSwing() {
     computeBttn.addActionListener(this::handleComputeBttnClicked);
@@ -111,7 +111,7 @@ public class InputSwing {
   }
 
   private void updateResult() {
-    Arrays.sort(result, (a, b) -> a.compareTo(b));
+    Arrays.sort(result, Triangle::compareTo);
 
     StringBuilder builder = new StringBuilder();
     for (Triangle t : result) {

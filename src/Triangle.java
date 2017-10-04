@@ -11,9 +11,17 @@ class Triangle {
   final Point2D c;
 
   Triangle(Line2D a, Line2D b, Line2D c) {
-    this.a = Geometry.intersection(a, b);
-    this.b = Geometry.intersection(a, c);
-    this.c = Geometry.intersection(b, c);
+    Point2D[] points = {
+      Geometry.intersection(a, b),
+      Geometry.intersection(a, c),
+      Geometry.intersection(b, c)
+    };
+
+    Arrays.sort(points, this::comparePoints);
+
+    this.a = points[0];
+    this.b = points[1];
+    this.c = points[2];
   }
 
   /**
@@ -21,17 +29,10 @@ class Triangle {
    * @return
    */
   String hash() {
-    Point2D[] points = {a, b, c};
-
-    Arrays.sort(points, (a, b) ->
-      (a.getX() != b.getX()) ?
-        Double.compare(a.getX(), b.getX()) :
-        Double.compare(a.getY(), b.getY())
-    );
-
-    return points[0].toString() +
-      points[1].toString() +
-      points[2].toString();
+    return
+      a.toString() +
+      b.toString() +
+      c.toString();
   }
 
   /**
@@ -63,13 +64,13 @@ class Triangle {
       '}';
   }
   
-  public int compareTo(Trianlge b) {
-    if (!this.a.equals(b.a)) return comparePoint(this.a, b.a);
-    if (!this.b.equals(b.b)) return comparePoint(this.b, b.b);
-    return comparePoint(this.c, c.c);
+  public int compareTo(Triangle b) {
+    if (!this.a.equals(b.a)) return comparePoints(this.a, b.a);
+    if (!this.b.equals(b.b)) return comparePoints(this.b, b.b);
+    return comparePoints(this.c, b.c);
   }
 
-  private int comparePoint(Point2D a, Point2D b) {
+  private int comparePoints(Point2D a, Point2D b) {
     if (a.getX() != b.getX()) return Double.compare(a.getX(), b.getX());
     return Double.compare(a.getY(), b.getY());
   }

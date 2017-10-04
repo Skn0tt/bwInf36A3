@@ -15,7 +15,7 @@ class OutputSwing {
 
     JFrame frame = new JFrame("OutputSwing");
     frame.setContentPane(drawArea);
-    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     frame.pack();
     frame.setVisible(true);
   }
