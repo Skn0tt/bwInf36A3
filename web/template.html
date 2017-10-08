@@ -4,8 +4,92 @@
   <meta charset="UTF-8">
   <title>Output</title>
 
-  <script type="text/javascript" src="./jsxgraphcore.js"></script>
-  <link rel="stylesheet" href="./jsxgraph.css">
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.6/jsxgraphcore.js"></script>
+  <style>
+    /*
+    Copyright 2008-2016
+        Matthias Ehmann,
+        Michael Gerhaeuser,
+        Carsten Miller,
+        Bianca Valentin,
+        Alfred Wassermann,
+        Peter Wilfahrt
+
+    This file is part of JSXGraph.
+
+    JSXGraph is free software dual licensed under the GNU LGPL or MIT License.
+
+    You can redistribute it and/or modify it under the terms of the
+
+      * GNU Lesser General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version
+      OR
+      * MIT License: https://github.com/jsxgraph/jsxgraph/blob/master/LICENSE.MIT
+
+    JSXGraph is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License and
+    the MIT License along with JSXGraph. If not, see <http://www.gnu.org/licenses/>
+    and <http://opensource.org/licenses/MIT/>.
+ */
+
+    .jxgbox {
+      /* for IE 7 */
+      position: relative;
+      overflow: hidden;
+      background-color: #ffffff;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #356AA0;
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      -ms-touch-action: none;
+      /* touch-action: none; */ /* Set with JavaScript */
+    }
+
+    .jxgbox svg text {
+      cursor: default;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .JXGtext {
+      font-family: Courier, monospace;
+      /**
+       * The default font family is now set in
+       * JXG.Options.text.cssdefaultstyle = 'font-family: Arial, Helvetica, Geneva, sans-serif;'
+       */
+      /*
+          font-family: Arial, Helvetica, Geneva, sans-serif;
+      */
+
+      /* "background-color: transparent;" may produce artefacts in IE. Solution: setting a color explicitly. */
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+    }
+
+    .JXGinfobox {
+      border-style: none;
+      border-width: 1px;
+      border-color: black;
+    }
+
+    /* CSS attributes will (permantely) overwrite attributes set in JSXGraph */
+    .JXGimage {
+      /* opacity: 1.0; */
+    }
+
+    .JXGimageHighlight {
+      /* opacity: 0.6; */
+    }
+  </style>
 </head>
 <body>
   <div id="box" class="jxgbox" style="width: 800px; height: 800px;"></div>
@@ -13,15 +97,42 @@
     const polygons = ##POLYGON##;
   </script>
   <script type="text/javascript">
-    var board = JXG.JSXGraph.initBoard('box', {
+    const items = [];
+    const board = JXG.JSXGraph.initBoard('box', {
       boundingBox: [-2, 4, 6, -4],
       axis: true,
-      grid: true,
+      grid: true
     });
 
+    const getPoint = p => board.create('point', p, { fixed: true, name: "" });
+
+    const colors = [
+      'red',
+      'blue',
+      'green',
+      'blue',
+      'yellow',
+      'teal',
+    ];
+
+    let i = 0;
     polygons.forEach(item => {
-      if (item.length === 2) board.create('segment', [item[0], item[1]]);
-      else board.create('polygon', [item[0], item[1], item[2]]);
+      if (item.length === 2)
+        items.push(
+          board.create(
+            'segment',
+            [item[0], item[1]],
+            { fixed: true }
+          )
+        );
+      else
+        items.push(
+          board.create(
+            'polygon',
+            [getPoint(item[0]), getPoint(item[1]), getPoint(item[2])],
+            { fillColor: colors[i++ % colors.length] }
+          )
+        );
     });
   </script>
 </body>

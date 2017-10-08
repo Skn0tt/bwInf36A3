@@ -5,21 +5,21 @@ import java.io.*;
 import java.util.Scanner;
 
 class OutputWeb {
-  private static final File template = new File("web/template.html");
+  private final InputStream template = this.getClass().getResourceAsStream("template.html");
 
   /**
    * Shows the given triangles in browser
    * @param triangles
    */
-  static void show(Triangle... triangles){
+  void show(Triangle... triangles){
     show(triangles2JSON(triangles));
   }
 
-  static void show(Line2D... lines) {
+  void show(Line2D... lines) {
     show(lines2JSON(lines));
   }
 
-  private static void show(String json) {
+  private void show(String json) {
     try {
       File htmlFile = getPage(json);
       Desktop.getDesktop().browse(htmlFile.toURI());
@@ -34,12 +34,12 @@ class OutputWeb {
    * @return
    * @throws IOException
    */
-  private static File getPage(String json) throws IOException {
+  private File getPage(String json) throws IOException {
     Scanner s = new Scanner(template, "UTF-8");
     String text = s.useDelimiter("\\A").next();
     String result = text.replaceAll("##POLYGON##", json);
 
-    File f = new File("./web/output.html");
+    File f = new File("./output.html");
 
     PrintWriter writer = new PrintWriter(new FileWriter(f));
     writer.print(result);

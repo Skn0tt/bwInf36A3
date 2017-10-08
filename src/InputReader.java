@@ -29,12 +29,13 @@ class InputReader {
   //TODO: check if legal input, throw exception if not
   private static List<Line2D> read(Scanner s) {
     List<Line2D> strecken = new ArrayList<>();
-    if (s.hasNextLine()) s.nextLine(); // Jump first line
 
     while(s.hasNextLine()) {  // Go through Lines
       String line = s.nextLine(); // Get Line
       if (line.isEmpty()) continue;
       String[] values = line.split(" ");
+
+      if (values.length != 4) continue; // Malformed Line
 
       Point2D a = new Point2D.Float(
         Float.parseFloat(values[0]),

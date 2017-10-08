@@ -23,7 +23,7 @@ class Main {
 
     Triangle[] triangles = g.triangles();
 
-    OutputWeb.show(triangles);
+    new OutputWeb().show(triangles);
 
     new OutputSwing(triangles);
     System.out.println(triangles.length);

@@ -3,8 +3,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.awt.geom.Line2D;
+import java.io.*;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class InputSwing {
   private JButton showInSwingBttn;
@@ -17,7 +20,7 @@ public class InputSwing {
   private JButton addLineBttn;
   private JButton computeBttn;
   private JTextArea inputTxtArea;
-  private JComboBox presetPicker;
+  private JComboBox<Entry> presetPicker;
   private JButton showInputBrowserBttn;
   private JPanel panel;
 
@@ -32,7 +35,6 @@ public class InputSwing {
     addLineBttn.addActionListener(this::handleAddLineBttnClicked);
     showInSwingBttn.addActionListener(this::handleShowInSwingBttnClicked);
     showInBrowserBttn.addActionListener(this::handleShowInBrowserBttnClicked);
-    presetPicker.addActionListener(this::handlePresetPickerAction);
     showInputBrowserBttn.addActionListener(this::handleShowInputBrowserClicked);
     inputTxtArea.getDocument().addDocumentListener(new DocumentListener() {
       @Override
@@ -50,14 +52,31 @@ public class InputSwing {
         updateInput();
       }
     });
+
+    presetPicker.addItem(entryFromResource("dreiecke1.txt"));
+    presetPicker.addItem(entryFromResource("dreiecke2.txt"));
+    presetPicker.addItem(entryFromResource("dreiecke3.txt"));
+    presetPicker.addItem(entryFromResource("dreiecke4.txt"));
+    presetPicker.addItem(entryFromResource("dreiecke5.txt"));
+    presetPicker.addItem(entryFromResource("dreiecke6.txt"));
+    presetPicker.setSelectedIndex(-1);
+    presetPicker.addItemListener(this::handlePresetPickerItemAction);
   }
 
   public static void main(String[] args) {
-    JFrame frame = new JFrame("InputSwing");
+    JFrame frame = new JFrame("triangleFinder");
     frame.setContentPane(new InputSwing().panel);
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.pack();
     frame.setVisible(true);
+  }
+
+  private Entry entryFromResource(String path) {
+    return new Entry(path, streamFromResource(path));
+  }
+
+  private InputStream streamFromResource(String path) {
+    return this.getClass().getClassLoader().getResourceAsStream(path);
   }
 
   private void handleComputeBttnClicked(ActionEvent e) {
@@ -92,15 +111,18 @@ public class InputSwing {
   private void handleShowInBrowserBttnClicked(ActionEvent e) {
     if (result == null) compute();
 
-    OutputWeb.show(result);
+    new OutputWeb().show(result);
   }
 
   private void handleShowInputBrowserClicked(ActionEvent e) {
-    OutputWeb.show(lines);
+    new OutputWeb().show(lines);
   }
 
-  //TODO: Implement
-  private void handlePresetPickerAction(ActionEvent e) {}
+  private void handlePresetPickerItemAction(ItemEvent e) {
+    Entry entry = (Entry) e.getItem();
+
+    inputTxtArea.setText(entry.value);
+  }
 
   private void compute() {
     String input = inputTxtArea.getText();
@@ -111,6 +133,11 @@ public class InputSwing {
   }
 
   private void updateResult() {
+    if (result.length < 1) {
+      outputTxtArea.setText("No triangles found");
+      return;
+    }
+
     Arrays.sort(result, Triangle::compareTo);
 
     StringBuilder builder = new StringBuilder();
@@ -130,15 +157,40 @@ public class InputSwing {
     } catch (Exception e) {
       inputLegal = false;
     }
+
     updateLegal();
   }
 
   private void updateLegal() {
-    if (inputLegal) return;
-    inputTxtArea.setBackground(Color.RED);
+    if (inputLegal) inputTxtArea.setBackground(Color.WHITE);
+    else inputTxtArea.setBackground(Color.RED);
   }
 
   private void alert(String s) {
     JOptionPane.showMessageDialog(panel, s);
+  }
+
+  private class Entry {
+    String label;
+    String value;
+
+    Entry(String label, InputStream stream) {
+      this.label = label;
+
+      Scanner scanner = new Scanner(stream, "UTF-8");
+      StringBuilder builder = new StringBuilder();
+
+      while(scanner.hasNextLine()) {
+        builder.append(scanner.nextLine());
+        builder.append('\n');
+      }
+
+      this.value = builder.toString();
+    }
+
+    @Override
+    public String toString() {
+      return this.label;
+    }
   }
 }
