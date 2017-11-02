@@ -26,7 +26,6 @@ class InputReader {
     return read(new Scanner(s));
   }
 
-  //TODO: check if legal input, throw exception if not
   private static List<Line2D> read(Scanner s) {
     List<Line2D> strecken = new ArrayList<>();
 
@@ -37,16 +36,16 @@ class InputReader {
 
       if (values.length != 4) continue; // Malformed Line
 
-      Point2D a = new Point2D.Float(
-        Float.parseFloat(values[0]),
-        Float.parseFloat(values[1])
+      Point2D a = new Point2D.Double(
+        Double.parseDouble(values[0]),
+        Double.parseDouble(values[1])
       );
-      Point2D b = new Point2D.Float(
-        Float.parseFloat(values[2]),
-        Float.parseFloat(values[3])
+      Point2D b = new Point2D.Double(
+        Double.parseDouble(values[2]),
+        Double.parseDouble(values[3])
       );
 
-      strecken.add(new Line2D.Float(a, b));
+      strecken.add(new Line2D.Double(a, b));
     }
 
     return strecken;

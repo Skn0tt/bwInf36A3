@@ -2,7 +2,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
 class Geometry {
-  private final static int factor = 8;
+  private final static int ROUND_PLACES = 8;
 
   /**
    * Takes in two lines and returns their intersection point.
@@ -39,7 +39,7 @@ class Geometry {
     double x = x0 + a * (x1 - x0);
     double y = y0 + a * (y1 - y0);
 
-    return new Point2D.Double(round(x, factor), round(y, factor));
+    return new Point2D.Double(round(x, ROUND_PLACES), round(y, ROUND_PLACES));
   }
 
   /**
