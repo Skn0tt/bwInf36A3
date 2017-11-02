@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.Scanner;
 
 class OutputWeb {
-  private final InputStream template = this.getClass().getResourceAsStream("template.html");
+  private final InputStream TEMPLATE = this.getClass().getResourceAsStream("template.html");
 
   /**
    * Shows the given triangles in browser
@@ -29,13 +29,13 @@ class OutputWeb {
   }
 
   /**
-   * Creates viewable HTML page from template
+   * Creates viewable HTML page from TEMPLATE
    * @param json
    * @return
    * @throws IOException
    */
   private File getPage(String json) throws IOException {
-    Scanner s = new Scanner(template, "UTF-8");
+    Scanner s = new Scanner(TEMPLATE, "UTF-8");
     String text = s.useDelimiter("\\A").next();
     String result = text.replaceAll("##POLYGON##", json);
 
