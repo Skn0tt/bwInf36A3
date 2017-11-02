@@ -80,13 +80,5 @@ class Graph {
     String hash() {
       return value.toString();
     }
-
-    @Override
-    public String toString() {
-      return
-        "Node{" +
-          "value=" + value +
-        '}';
-    }
   }
 }
