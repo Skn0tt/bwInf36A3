@@ -114,27 +114,29 @@
       'green',
       'blue',
       'yellow',
-      'teal',
+      'teal'
     ];
 
     let i = 0;
     polygons.forEach(item => {
-      if (item.length === 2)
+      if (item.length === 2) {
         items.push(
-          board.create(
-            'segment',
-            [item[0], item[1]],
-            { fixed: true }
-          )
+            board.create(
+                'segment',
+                [item[0], item[1]],
+                { fixed: true }
+            )
         );
-      else
+      }
+      else {
         items.push(
-          board.create(
-            'polygon',
-            [getPoint(item[0]), getPoint(item[1]), getPoint(item[2])],
-            { fillColor: colors[i++ % colors.length] }
-          )
+            board.create(
+                'polygon',
+                [getPoint(item[0]), getPoint(item[1]), getPoint(item[2])],
+                { fillColor: colors[i++ % colors.length] }
+            )
         );
+      }
     });
   </script>
 </body>
