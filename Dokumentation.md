@@ -8,20 +8,6 @@ output:
     toc: true
 ---
 
-# Aufgabe
-Janina hat von ihrer Freundin Nadine ein Rätsel aus dem Internet zugeschickt bekommen:
-Wie viele Dreiecke sind in dieser Zeichnung zu sehen?
-
-Nachdem Janina eine Weile Dreiecke gezählt hat, will sie ihr Ergebnis im Internet nachprüfen.
-Sie findet aber keine Lösung, sondern nur weitere Rätsel dieser Art.
-Da sie sich nicht jedes Mal erneut ans Zählen machen will, überlegt sie, ob sich solche Rätsel mit einem Computer lösen lassen.
-
-Versetze dich in Janinas Lage und schreibe ein Programm, das die Dreiecke in einer Rätsel-Zeichnung zählt.
-Eine Zeichnung besteht aus einigen Strecken.
-Du kannst davon ausgehen, dass keine zwei Strecken auf derselben Geraden liegen und dass sich nie mehr als zwei Strecken im gleichen Punkt schneiden.
-In der obigen Zeichnung sind übrigens neun Dreiecke zu finden.
-Wende dein Programm auf die Beispiele an, die du auf den BwInf-Webseiten findest.
-
 # Lösungsansatz
 In dieser Aufgabe lässt sich ein Dreieck wie folgt definieren:
 
@@ -135,7 +121,7 @@ $$
 In diesem Fall ergibt sich der Schnittpunkt $(x; y)$ aus den oben genannten Geradengleichungen.
 
 
-# Besonderheiten in der Implementierung
+# Besonderheiten in der Umsetzung
 Ich habe die Implementierung bereits im Quellcode dokumentiert.
 Die wichtigsten Dinge werden im folgenden gesondert erläutert.
 
@@ -195,7 +181,7 @@ In diesem ist die eigene Strecke als `Line2D`-Objekt sowie Knotenpunkte, die mit
 
 Aus der Aufgabenstellung geht hervor, dass es keine identischen Strecken gibt.
 Damit die gleiche Strecke nicht mehrmals im Graphen vorliegt, sind alle Knotenpunkte in einer `Map` gespeichert, in der sie durch einen Hash (bestehend aus ihren Koordinaten) eindeutig identifiziert werden.
-Wird nun die gleiche Strecke zweimal hinzugefügt, so wird die alte  überschrieben.
+Wird nun die gleiche Strecke zweimal hinzugefügt, so wird die Alte  überschrieben.
 
 Die Erstellung des Graphen funktioniert wiefolgt:
 Zuerst werden alle Knotenpunkte hinzugefügt.
@@ -294,12 +280,9 @@ Keine Dreiecke gefunden
 ![dreiecke3.txt](./images/dreiecke3.png)
 ```json
 [
-  [[21.66666667, 130.0], [30.0, 180.0], [63.33333333, 130.0]],
-  [[21.66666667, 130.0], [30.0, 180.0], [80.0, 130.0]], [[30.0, 180.0], [63.33333333, 130.0], [80.0, 130.0]],
-  [[30.0, 180.0], [92.92682927, 85.6097561], [122.14285714, 87.85714286]],
-  [[30.0, 180.0], [110.0, 60.0], [130.0, 80.0]],
-  [[65.91836735, 64.89795918], [88.18181818, 38.18181818], [110.0, 60.0]],
-  [[90.54054054, 62.16216216], [100.0, 50.0], [110.0, 60.0]]
+  [[75.63636364, 56.36363636], [77.34042553, 73.40425532], [89.56521739, 67.97101449]],
+  [[104.57831325, 80.48192771], [118.35051546, 91.95876289], [140.0, 40.0]],
+  [[109.75308642, 112.59259259], [118.35051546, 91.95876289], [132.75862069, 103.96551724]]
 ];
 ```
 
