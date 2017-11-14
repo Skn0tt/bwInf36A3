@@ -1,5 +1,8 @@
 ---
 title: "Aufgabe 3: Dreiecke zählen"
+author: "Simon Knott, Team-ID: 00359"
+date: 14.11.17
+toc: true
 output:
   pdf_document:
     pandoc_args: [
@@ -121,9 +124,36 @@ $$
 In diesem Fall ergibt sich der Schnittpunkt $(x; y)$ aus den oben genannten Geradengleichungen.
 
 
-# Besonderheiten in der Umsetzung
+# Umsetzung
 Ich habe die Implementierung bereits im Quellcode dokumentiert.
 Die wichtigsten Dinge werden im folgenden gesondert erläutert.
+
+## Architektur der Lösung
+Der Code besteht aus folgenden drei Teilen:
+
+- Input
+  - Nimmt die Nutzereingaben entgegen
+  - Klasen:
+    - InputSwing
+      - Simple Swing-GUI
+    - InputReader
+      - Parser, um aus den Eingaben `Line2D`-Objekte zu erzeugen
+- Berechnung
+  - Eigentlicher Algorithmus, berechnet die Dreiecke
+  - Klassen:
+    - Graph
+      - Modelliert den Graphen
+      - Kümmert sich um die Suche der Dreieecke
+    - Triangle
+      - Modelliert ein Dreieck
+    - Geometry
+      - enthält die Methoden zur Berechnung eines Schnittpunkts (Vektorrechnung)
+- Output
+  - Zeigt die gefundenen Dreiecke/Strecken der Eingabe an
+  - OutputSwing
+    - Zeigt Output in einem Swing-Fenster an
+  - OutputWeb
+    - Zeigt Output mithilfe `JSXGraph` in einem Browserfenster an
 
 ## Modellierung der Geometrischen Figuren
 Um die Figuren zu modellieren, habe ich soweit es geht auf die Objekte des JDK zurückgegriffen.
@@ -258,7 +288,9 @@ Mit den vorgegebenen Testdateien haben wir folgende Ergebnisse ermittelt:
 
 ## dreiecke1.txt
 ![dreiecke1.txt](./images/dreiecke1.png)
+
 9 Dreiecke
+
 ```json
 [
   [[0.0, 0.0], [0.0, 200.0], [120.0, 0.0]],
@@ -278,7 +310,9 @@ Keine Dreiecke gefunden
 
 ## dreiecke3.txt
 ![dreiecke3.txt](./images/dreiecke3.png)
+
 3 Dreiecke
+
 ```json
 [
   [[75.63636364, 56.36363636], [77.34042553, 73.40425532], [89.56521739, 67.97101449]],
@@ -289,7 +323,9 @@ Keine Dreiecke gefunden
 
 ## dreiecke4.txt
 ![dreiecke4.txt](./images/dreiecke4.png)
+
 5 Dreiecke
+
 ```json
 [
   [[38.82352941, 141.76470588], [52.34042553, 129.14893617], [60.0, 110.0]],
@@ -302,8 +338,10 @@ Keine Dreiecke gefunden
 
 ## dreiecke5.txt
 ![dreiecke5.txt](./images/dreiecke5.png)
-```json
+
 1 Dreieck
+
+```json
 [
   [[61.73913043, 103.47826087], [73.33333333, 93.33333333], [80.0, 140.0]]
 ];  
@@ -311,7 +349,9 @@ Keine Dreiecke gefunden
 
 ## dreiecke6.txt
 ![dreiecke6.txt](./images/dreiecke6.png)
+
 20 Dreiecke
+
 ```json
 [
   [[10.0, 130.0], [39.28286853, 75.61752988], [55.65217391, 84.34782609]],
