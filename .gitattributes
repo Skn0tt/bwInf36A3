@@ -1,0 +1,8 @@
+doc/Skizze[[:space:]]Graph.afdesign filter=lfs diff=lfs merge=lfs -text
+images/Skizze[[:space:]]Graph.afdesign filter=lfs diff=lfs merge=lfs -text
+images/SkizzeGraph.png filter=lfs diff=lfs merge=lfs -text
+images/dreiecke1.png filter=lfs diff=lfs merge=lfs -text
+images/dreiecke3.png filter=lfs diff=lfs merge=lfs -text
+images/dreiecke4.png filter=lfs diff=lfs merge=lfs -text
+images/dreiecke5.png filter=lfs diff=lfs merge=lfs -text
+images/dreiecke6.png filter=lfs diff=lfs merge=lfs -text
